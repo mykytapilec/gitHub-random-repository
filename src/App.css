@@ -36,30 +36,70 @@
 }
 
 .description {
-  margin: 20px 0 28px;
+  margin: 20px 0 32px;
   color: #6b7280;
   font-size: 1.0625rem;
   line-height: 1.7;
 }
 
-.status {
-  display: inline-flex;
-  align-items: center;
+.language-field {
+  display: grid;
   gap: 10px;
-  margin: 0;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: #f3f4f6;
+}
+
+.language-field label {
   color: #374151;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 600;
 }
 
-.status-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #16a34a;
+.language-field select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #111827;
+  cursor: pointer;
+}
+
+.language-field select:focus-visible,
+.retry-button:focus-visible {
+  outline: 3px solid rgb(79 70 229 / 30%);
+  outline-offset: 2px;
+}
+
+.feedback {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.error-panel {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+}
+
+.error-panel .feedback {
+  color: #b91c1c;
+}
+
+.retry-button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.retry-button:hover {
+  background: #4338ca;
 }
 
 @media (max-width: 480px) {
