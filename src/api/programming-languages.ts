@@ -3,8 +3,13 @@ export interface ProgrammingLanguage {
   value: string
 }
 
+interface GitHuntLanguage {
+  title: string
+  value: string
+}
+
 const LANGUAGES_URL =
-  'https://raw.githubusercontent.com/kamranahmedse/githunt/master/src/components/filters/language-filter/languages.json'
+  'https://raw.githubusercontent.com/nilbuild/githunt/master/src/components/filters/language-filter/languages.json'
 
 export async function fetchProgrammingLanguages(): Promise<
   ProgrammingLanguage[]
@@ -24,18 +29,25 @@ export async function fetchProgrammingLanguages(): Promise<
   }
 
   const languages = data.filter(
-    (item): item is ProgrammingLanguage =>
+    (item): item is GitHuntLanguage =>
       typeof item === 'object' &&
       item !== null &&
-      'name' in item &&
-      typeof item.name === 'string' &&
+      'title' in item &&
+      typeof item.title === 'string' &&
       'value' in item &&
       typeof item.value === 'string',
   )
 
-  if (languages.length === 0) {
+  const result = languages
+    .filter((language) => language.value.trim() !== '')
+    .map((language) => ({
+      name: language.title,
+      value: language.value,
+    }))
+
+  if (result.length === 0) {
     throw new Error('No programming languages were found.')
   }
 
-  return languages
+  return result
 }

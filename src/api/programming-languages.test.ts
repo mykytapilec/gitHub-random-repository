@@ -4,10 +4,17 @@ import {
   type ProgrammingLanguage,
 } from './programming-languages'
 
+const sourceLanguages = [
+  { title: 'All Languages', value: '' },
+  { title: 'JavaScript', value: 'JavaScript' },
+  { title: 'TypeScript', value: 'TypeScript' },
+  { title: 'Python', value: 'Python' },
+]
+
 const languages: ProgrammingLanguage[] = [
-  { name: 'JavaScript', value: 'javascript' },
-  { name: 'TypeScript', value: 'typescript' },
-  { name: 'Python', value: 'python' },
+  { name: 'JavaScript', value: 'JavaScript' },
+  { name: 'TypeScript', value: 'TypeScript' },
+  { name: 'Python', value: 'Python' },
 ]
 
 function mockFetch(
@@ -33,13 +40,13 @@ afterEach(() => {
 
 describe('fetchProgrammingLanguages', () => {
   it('requests the language list from the configured URL', async () => {
-    const fetchMock = mockFetch(languages)
+    const fetchMock = mockFetch(sourceLanguages)
 
     const result = await fetchProgrammingLanguages()
 
     expect(fetchMock).toHaveBeenCalledOnce()
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://raw.githubusercontent.com/kamranahmedse/githunt/master/src/components/filters/language-filter/languages.json',
+      'https://raw.githubusercontent.com/nilbuild/githunt/master/src/components/filters/language-filter/languages.json',
     )
     expect(result).toEqual(languages)
   })
@@ -53,7 +60,7 @@ describe('fetchProgrammingLanguages', () => {
   })
 
   it('rejects an invalid response format', async () => {
-    mockFetch({ languages })
+    mockFetch({ languages: sourceLanguages })
 
     await expect(fetchProgrammingLanguages()).rejects.toThrow(
       'Invalid programming languages response.',
@@ -62,8 +69,8 @@ describe('fetchProgrammingLanguages', () => {
 
   it('rejects a response without valid language entries', async () => {
     mockFetch([
-      { name: 'JavaScript' },
-      { value: 'typescript' },
+      { title: 'JavaScript' },
+      { value: 'TypeScript' },
       null,
     ])
 
@@ -72,10 +79,10 @@ describe('fetchProgrammingLanguages', () => {
     )
   })
 
-  it('filters invalid entries from the response', async () => {
+  it('filters invalid entries and excludes the empty language option', async () => {
     mockFetch([
-      ...languages,
-      { name: 'Invalid language' },
+      ...sourceLanguages,
+      { title: 'Invalid language' },
       null,
     ])
 
