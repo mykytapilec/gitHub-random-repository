@@ -245,4 +245,80 @@ describe('App', () => {
     )
     expect(repositoryLink).toHaveAttribute('target', '_blank')
   })
+
+    it('changes the button label to Refresh after finding a repository', async () => {
+    mockLanguages()
+
+    vi.spyOn(
+      repositoriesApi,
+      'fetchRandomRepository',
+    ).mockResolvedValue(repository)
+
+    render(<App />)
+
+    await screen.findByRole('combobox', {
+      name: 'Programming language',
+    })
+
+    expect(
+      screen.getByRole('button', { name: 'Find repository' }),
+    ).toBeInTheDocument()
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Find repository' }),
+    )
+
+    expect(
+      await screen.findByRole('button', { name: 'Refresh' }),
+    ).toBeInTheDocument()
+  })
+
+  it('fetches another repository when Refresh is clicked', async () => {
+    mockLanguages()
+
+    const anotherRepository: GitHubRepository = {
+      ...repository,
+      id: 2,
+      name: 'example-project',
+      full_name: 'example/example-project',
+      html_url: 'https://github.com/example/example-project',
+      description: 'An example repository.',
+    }
+
+    const fetchRepositorySpy = vi
+      .spyOn(repositoriesApi, 'fetchRandomRepository')
+      .mockResolvedValueOnce(repository)
+      .mockResolvedValueOnce(anotherRepository)
+
+    render(<App />)
+
+    await screen.findByRole('combobox', {
+      name: 'Programming language',
+    })
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Find repository' }),
+    )
+
+    expect(
+      await screen.findByRole('heading', {
+        name: 'microsoft/typescript',
+      }),
+    ).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Refresh' }))
+
+    expect(
+      await screen.findByRole('heading', {
+        name: 'example/example-project',
+      }),
+    ).toBeInTheDocument()
+
+    expect(fetchRepositorySpy).toHaveBeenCalledTimes(2)
+    expect(fetchRepositorySpy).toHaveBeenNthCalledWith(1, 'javascript')
+    expect(fetchRepositorySpy).toHaveBeenNthCalledWith(2, 'javascript')
+    expect(
+      screen.getByRole('button', { name: 'Refresh' }),
+    ).toBeInTheDocument()
+  })
 })
