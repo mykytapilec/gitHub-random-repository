@@ -65,7 +65,9 @@
 }
 
 .language-field select:focus-visible,
-.retry-button:focus-visible {
+.retry-button:focus-visible,
+.find-button:focus-visible,
+.repository-card a:focus-visible {
   outline: 3px solid rgb(79 70 229 / 30%);
   outline-offset: 2px;
 }
@@ -87,8 +89,9 @@
   color: #b91c1c;
 }
 
-.retry-button {
-  min-height: 42px;
+.retry-button,
+.find-button {
+  min-height: 44px;
   padding: 0 16px;
   border: 0;
   border-radius: 10px;
@@ -96,14 +99,139 @@
   color: #ffffff;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 150ms ease;
 }
 
-.retry-button:hover {
+.retry-button:hover,
+.find-button:hover:not(:disabled) {
   background: #4338ca;
 }
 
+.find-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.repository-feedback {
+  margin-top: 20px;
+}
+
+.repository-card {
+  margin-top: 28px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  background: #f9fafb;
+}
+
+.repository-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.repository-label {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.repository-language {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.repository-card h2 {
+  margin: 18px 0 10px;
+  font-size: 1.375rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.repository-card h2 a {
+  color: #111827;
+  text-decoration: none;
+}
+
+.repository-card h2 a:hover {
+  color: #4f46e5;
+}
+
+.repository-description {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.repository-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+  padding: 18px 0;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.repository-stats div {
+  display: grid;
+  gap: 6px;
+}
+
+.repository-stats dt {
+  color: #6b7280;
+  font-size: 0.8125rem;
+}
+
+.repository-stats dd {
+  margin: 0;
+  color: #111827;
+  font-size: 1.125rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.repository-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #4f46e5;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.repository-link:hover {
+  color: #4338ca;
+}
+
 @media (max-width: 480px) {
+  .app-shell {
+    padding: 16px;
+  }
+
   .welcome-card {
     padding: 28px;
+  }
+
+  .repository-card {
+    padding: 18px;
+  }
+
+  .repository-stats {
+    gap: 8px;
+  }
+
+  .repository-stats dd {
+    font-size: 1rem;
   }
 }
