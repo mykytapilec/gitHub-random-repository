@@ -134,7 +134,9 @@ function App() {
               >
                 {isRepositoryLoading
                   ? 'Finding repository...'
-                  : 'Find repository'}
+                  : repository
+                    ? 'Refresh'
+                    : 'Find repository'}
               </button>
             </>
           )}
