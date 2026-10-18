@@ -214,21 +214,43 @@
   color: #4338ca;
 }
 
+
 @media (max-width: 480px) {
   .app-shell {
     padding: 16px;
   }
 
   .welcome-card {
-    padding: 28px;
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    overflow-wrap: anywhere;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .find-button,
+  .retry-button {
+    width: 100%;
   }
 
   .repository-card {
     padding: 18px;
   }
 
+  .repository-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .repository-stats {
-    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
   }
 
   .repository-stats dd {
