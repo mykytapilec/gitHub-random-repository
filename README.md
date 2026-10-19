@@ -1,75 +1,97 @@
-# React + TypeScript + Vite
+# GitHub Random Repository
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application that helps developers discover random GitHub repositories by programming language.
 
-Currently, two official plugins are available:
+This project is based on the [GitHub Random Repository](https://roadmap.sh/projects/github-random-repo) challenge from roadmap.sh.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Select a programming language.
+- Discover a random GitHub repository for the selected language.
+- Refresh the result to find another repository.
+- View repository descriptions, programming languages, stars, forks, and open issues.
+- Open the repository on GitHub.
+- Handle loading states and request errors with retry options.
+- Responsive layout for mobile and desktop screens.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Vite
+- GitHub REST API
+- Vitest
+- React Testing Library
+- ESLint
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js
+- npm
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
 
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/mykytapilec/gitHub-random-repository.git
+cd gitHub-random-repository
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Start the development server:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run dev
 ```
+
+Open the local URL printed in the terminal.
+
+## Available Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm test` | Run the test suite once |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run lint` | Run ESLint |
+| `npm run build` | Type-check and build the production application |
+| `npm run preview` | Preview the production build locally |
+
+## Project Structure
+
+```text
+src/
+├── api/
+│   ├── github-repositories.ts
+│   ├── github-repositories.test.ts
+│   ├── programming-languages.ts
+│   └── programming-languages.test.ts
+├── App.tsx
+├── App.css
+├── index.css
+└── main.tsx
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+npm test
+```
+
+Run linting and the production build:
+
+```bash
+npm run lint
+npm run build
+```
+
+## License
+
+This project was created for learning purposes as part of the roadmap.sh project challenges.
